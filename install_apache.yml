@@ -1,10 +1,12 @@
 ---
+
 - hosts: all
   become: true
   tasks:
-
-  - name: install apache2 package
+  - name: install apache2 and php packages
+    tags: apache,php 
     apt:
-       name: apache2
-       state: latest
-    when: ansible_distribution == "Ubuntu"
+      name:
+        - "{{ apache2_package }}" 
+        - "{{ php_package }}"
+      state: latest
