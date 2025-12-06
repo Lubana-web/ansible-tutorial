@@ -1,2 +1,2 @@
 [web-server]
-192.168.157.128 ansible_user=lubana11 apache2_package=apache2 php_package=libapache2-mod-php
+192.168.145.128 ansible_user=lubana11 apache2_package=apache2 php_package=libapache2-mod-php
