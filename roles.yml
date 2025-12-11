@@ -10,14 +10,7 @@
         - "{{ apache2_package }}" 
         - "{{ php_package }}"
       state: latest
-  - name: copy default html file for site 
-    tags: apache
-    copy:
-       src: default_site.html
-       dest: /var/www/html/index.html
-       owner: root
-       group: root 
-       mode: 0644
+  
   - name: changing email for alla file
     tags: apache
     lineinfile: 
@@ -30,15 +23,11 @@
         name: httpd
         state: restarted
     when: httpd.changed
-  - name: add ssh key for user(alla)
-    tags: always
-    authorized_key:
-         user: alla 
-         key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMC8gqZwBlDpJ6nvEMECN1xAkDnUzVuvYLgpDvU3azij ansible"
+- hosts: all
+  become: true
+  roles:
+      - base
 - hosts: web-server
   become: true
-  tasks:
-  - name: install db
-    apt: 
-      name: mariadb-server
-      state: latest   
+  roles:
+      - web-server

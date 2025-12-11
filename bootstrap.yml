@@ -1,0 +1,29 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+  - name: update
+    tags: always
+    apt:
+      upgrade: dist
+      update_cache: yes
+  - name: add user name alaa
+    tags: always
+    user:
+      name: alla
+      group: root    
+  - name: add ssh key for user(alla)
+    tags: always
+    authorized_key:
+         user: alla 
+         key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMC8gqZwBlDpJ6nvEMECN1xAkDnUzVuvYLgpDvU3azij ansible"
+  - name: copy sudoers to alla
+    tags: always
+    copy: 
+      src: sudoer_alla
+      dest: /etc/sudoers.d/alla
+      owner: root
+      group: root
+      mode: 0440         
+         

@@ -1,0 +1,13 @@
+- name: install db
+  tags: db
+  apt:
+    name: mariadb-server 
+    state: latest
+- name: copy file 
+  tags: apache
+  copy:
+     src: default_site.html
+     dest: /var/www/index.html
+     owner: root
+     group: root
+     mode: 0644

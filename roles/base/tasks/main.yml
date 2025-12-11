@@ -1,0 +1,4 @@
+- name: add ssh key for user alla
+  authorized_key:
+       user: alla
+       key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMC8gqZwBlDpJ6nvEMECN1xAkDnUzVuvYLgpDvU3azij ansible"
