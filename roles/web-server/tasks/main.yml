@@ -11,3 +11,10 @@
      owner: root
      group: root
      mode: 0644
+- name: changing email for alla file
+  tags: apache
+  lineinfile:
+        path: /home/lubana11/alla
+        regexp: '^email'
+        line: email LUBANA6@gmail.ask
+  notify: restart_apache

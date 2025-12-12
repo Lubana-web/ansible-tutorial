@@ -1,0 +1,41 @@
+# SSH server system-wide configuration file
+
+# الاستماع على كل الواجهات
+Port 22
+ListenAddress 0.0.0.0
+AllowUsers {{ ssh_users }}
+# مفاتيح المضيف
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+# المصادقة
+PermitRootLogin yes          # مؤقتًا للتجربة
+PubkeyAuthentication yes
+PasswordAuthentication yes   # مؤقتًا للتجربة
+
+# تحسين الاستقرار لمنع Connection reset
+MaxStartups 100:30:200
+ClientAliveInterval 60
+
+# التحكم بالجلسات
+MaxSessions 10
+
+# KEX و Algorithms لدعم جميع المفاتيح الحديثة
+PubkeyAcceptedAlgorithms +ssh-ed25519
+HostKeyAlgorithms +ssh-ed25519
+
+# تسجيل الدخول
+LogLevel INFO
+SyslogFacility AUTH
+
+# الرسائل الترحيبية
+PrintMotd no
+
+# نظام SFTP
+Subsystem sftp /usr/lib/openssh/sftp-server
+
+# السماح بتمرير متغيرات البيئة
+AcceptEnv LANG LC_*
+
+

@@ -6,23 +6,8 @@
   - name: install apache2 and php packages
     tags: apache,php 
     apt:
-      name:
-        - "{{ apache2_package }}" 
-        - "{{ php_package }}"
+      name: apache2
       state: latest
-  
-  - name: changing email for alla file
-    tags: apache
-    lineinfile: 
-        path: /home/lubana11/alla
-        regexp: '^email'
-        line: email alla36@gmail.com
-    register: httpd
-  - name: restart httpd
-    service:
-        name: httpd
-        state: restarted
-    when: httpd.changed
 - hosts: all
   become: true
   roles:

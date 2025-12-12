@@ -18,18 +18,6 @@
        owner: root
        group: root 
        mode: 0644
-  - name: changing email for alla file
-    tags: apache
-    lineinfile: 
-        path: /home/lubana11/alla
-        regexp: '^email'
-        line: email alla36@gmail.com
-    register: httpd
-  - name: restart httpd
-    service:
-        name: httpd
-        state: restarted
-    when: httpd.changed
   - name: add ssh key for user(alla)
     tags: always
     authorized_key:
